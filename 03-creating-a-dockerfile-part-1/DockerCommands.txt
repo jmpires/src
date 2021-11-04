@@ -1,0 +1,48 @@
+
+# Lesson [25]
+
+docker image build -t web1 .
+docke image build -t web1:1.0 .
+
+docker image ls
+
+docker image inspect web1
+
+docker image rm web1
+docker image rm web1:1.0
+
+docker login
+(see configuration after 1st use - ls -la ~/.docker
+
+docker image tag web1 jmpires/web1:latest
+docker image push jmpires/web1:latest
+(see it now in the repository)
+
+
+docker image ls
+docker image rm -f 4402
+
+docker pull jmpires/web1:latest
+(can laso be deleted there in settings/delete)
+
+# Lesson [26]
+
+docker container ls
+docker container ls -a
+
+docker container rm dab586882318
+docker container run -it -p 5000:5000 -e FLASK_APP=app.py web2
+docker container run -it --rm --name web2 -p 5000:5000 -e FLASK_APP=app.py web2
+docker container run -it --rm --name web2 -p 5000:5000 -e FLASK_APP=app.py -d web2
+
+docker container run -it --rm --name web2_2 -p 5000 -e FLASK_APP=app.py -d web2
+docker container run -it --name web2_3 -p 5000 -e FLASK_APP=app.py -d --restart on-failure web2
+
+docker container logs web2
+docker container logs -f
+
+docker container stats
+
+docker container stop web2
+sudo service docker restart
+docker container ls

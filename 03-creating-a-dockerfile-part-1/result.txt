@@ -1,0 +1,116 @@
+[
+    {
+        "Id": "sha256:9772c0ec16f0241d5e0ea04c33f496aef78a4179ff74a53f30bddcfeb2886e53",
+        "RepoTags": [
+            "web1:latest",
+            "web:latest"
+        ],
+        "RepoDigests": [],
+        "Parent": "sha256:d117a1c444c73ff9df766903f10c5262e53aa771dd9d0c3a83edafe6dfe45c61",
+        "Comment": "",
+        "Created": "2021-11-03T10:29:54.27707792Z",
+        "Container": "5dea86bc9c948acdd73138819fbe4bb3ad9f82b465cf293efb464988ab0bfe6f",
+        "ContainerConfig": {
+            "Hostname": "5dea86bc9c94",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "PYTHONIOENCODING=UTF-8",
+                "GPG_KEY=C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF",
+                "PYTHON_VERSION=2.7.18",
+                "PYTHON_PIP_VERSION=20.0.2",
+                "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/d59197a3c169cef378a22428a3fa99d33e080a5d/get-pip.py",
+                "PYTHON_GET_PIP_SHA256=421ac1d44c0cf9730a088e337867d974b91bdce4ea2636099275071878cc189e"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"/bin/sh\" \"-c\" \"flask run --host=0.0.0.0 --port=5000\"]"
+            ],
+            "Image": "sha256:d117a1c444c73ff9df766903f10c5262e53aa771dd9d0c3a83edafe6dfe45c61",
+            "Volumes": null,
+            "WorkingDir": "/app",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "maintainer": "Jorge Pires <jorgepires.email@gmail.com>",
+                "version": "1.0"
+            }
+        },
+        "DockerVersion": "20.10.10",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "PYTHONIOENCODING=UTF-8",
+                "GPG_KEY=C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF",
+                "PYTHON_VERSION=2.7.18",
+                "PYTHON_PIP_VERSION=20.0.2",
+                "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/d59197a3c169cef378a22428a3fa99d33e080a5d/get-pip.py",
+                "PYTHON_GET_PIP_SHA256=421ac1d44c0cf9730a088e337867d974b91bdce4ea2636099275071878cc189e"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "flask run --host=0.0.0.0 --port=5000"
+            ],
+            "Image": "sha256:d117a1c444c73ff9df766903f10c5262e53aa771dd9d0c3a83edafe6dfe45c61",
+            "Volumes": null,
+            "WorkingDir": "/app",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "maintainer": "Jorge Pires <jorgepires.email@gmail.com>",
+                "version": "1.0"
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 82544165,
+        "VirtualSize": 82544165,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/b83ff30de4fada26633c13ee0f9d0b8c05c6090c50ab0bfed588937d8e523708/diff:/var/lib/docker/overlay2/00d8b5f7adf92db2ccf48c0c81af3bdd0cbd7d12d81ad28891d84e467107f277/diff:/var/lib/docker/overlay2/bc464a6cdaa8a8439637d895fb7c0c8b30cf60ec0ee65d895b3b6405462a51a8/diff:/var/lib/docker/overlay2/87a4331672a1b743c83f70177bcf287083b0f97ac8c6e50ac5bc0b26e79a9d45/diff:/var/lib/docker/overlay2/af2cd9e852cd47d7045edce00eacbd7b60bdac48320f8f3304dcfdb1f7d43177/diff:/var/lib/docker/overlay2/9f175aa3d8193da20c33c0a7450278d4d917b6115acd9b4f8b78638d289db367/diff:/var/lib/docker/overlay2/11ccee1fc9308522d9cbceb43d90fa586e343797e5bbcb4de237c9730fd1a197/diff",
+                "MergedDir": "/var/lib/docker/overlay2/7f671f09ac8369cdbb04bbdc9abaa7b599b55af1552804210edb567d6a428b0b/merged",
+                "UpperDir": "/var/lib/docker/overlay2/7f671f09ac8369cdbb04bbdc9abaa7b599b55af1552804210edb567d6a428b0b/diff",
+                "WorkDir": "/var/lib/docker/overlay2/7f671f09ac8369cdbb04bbdc9abaa7b599b55af1552804210edb567d6a428b0b/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:beee9f30bc1f711043e78d4a2be0668955d4b761d587d6f60c2c8dc081efb203",
+                "sha256:3fc750b41be7af9af9883a35756323c83a446bc3787abcdbe5e91910f324fbaa",
+                "sha256:20a7b70bdf2f892df2bb8ae82023723a6ff1c48595cd4407f4696d4315f76e8b",
+                "sha256:879c0d8666e3b7c43215762f0874265111f59c1c06054f9c6626be33e830d352",
+                "sha256:6ae4c72b7c447202bd757b68c1272498e3a107a1465b0933d8b77d13ca948b35",
+                "sha256:26145d40313f4634ada417cc8899a3be984e070c429bdb8d0c99228674532b3a",
+                "sha256:d2f297cd5abbd3e44849e9c66fa03006682b7b98d665316358450cb1c3485dce",
+                "sha256:4f8a6b8a9da80fc17628e57ce304d26d4758fefcfb99e47ded132864e321e901"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2021-11-03T10:31:14.236311378Z"
+        }
+    }
+]
