@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -e # The script ill stop in the first error
 
 echo "The Dockerfile ENTRYPOINT has been executed!"
 

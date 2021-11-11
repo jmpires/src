@@ -1,5 +1,5 @@
 # Pull from the alpine image
-FROM  python:2.7-alpine
+FROM  python:2.7-slim
 
 # Make a folder to store the app source code and setting the working directory
 RUN mkdir /app

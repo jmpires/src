@@ -1,0 +1,18 @@
+# whitelisting files (should start with * and then each file should be preceded by *)
+*
+!Dockerfile
+
+.dockerignore
+
+# ignoring git folder
+.git/
+
+# ignore all files in foo, including the folder itself
+.foo/*
+
+# ignore all the files in all folders than finishes with .swp extension
+**/*.swp
+**/*.txt
+
+# ignore all .txt files with the exception of the special.txt file
+!special.txt

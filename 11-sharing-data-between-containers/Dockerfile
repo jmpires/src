@@ -14,6 +14,6 @@ COPY . .
 LABEL maintainer="Nick Janetakis <nick.janetakis@gmail.com>" \
       version="1.0"
 
-VOLUME ["/app/public"]
+# VOLUME ["/app/public"] (can be unidented when needed)
 
 CMD flask run --host=0.0.0.0 --port=5000

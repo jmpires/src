@@ -8,6 +8,10 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 
 RUN apk add --no-cache --virtual .build-deps \
+
+# add new dependencies
+# e.g.: postgresql-dev dep1 dep2 dep3 ... depN \
+
     && pip install -r requirements.txt \
     && find /usr/local \
         \( -type d -a -name test -o -name tests \) \

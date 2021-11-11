@@ -1,8 +1,9 @@
 # Updates:
 #   Nov 2019: Update base Docker image to use a more recent version of Python
 #             You can also use python:3.7.5-slim-buster for a Debian image
-FROM python:3.7.5-alpine
+FROM python:2.7-slim
 
+RUN apt-get update && apt-get install -y net-tools iputils-ping
 RUN mkdir /app
 WORKDIR /app
 
