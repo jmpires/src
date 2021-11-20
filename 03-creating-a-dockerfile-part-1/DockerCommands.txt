@@ -1,0 +1,198 @@
+# Lesson [25]
+
+docker image build -t web1 .
+docker image build -t web1:1.0 .
+
+docker image ls
+
+docker image inspect web1
+
+docker image rm web1
+docker image rm web1:1.0
+
+docker login
+(see configuration after 1st use - ls -la ~/.docker
+
+docker image tag web1 jmpires/web1:latest
+docker image push jmpires/web1:latest
+(see it now in the repository)
+
+
+docker image ls
+docker image rm -f 4402
+
+docker pull redis:3.2-alpine
+docker pull jmpires/web1:latest
+(can also be deleted there in settings/delete)
+
+# Lesson [26/27/28]
+
+docker container ls
+docker container ls -a
+
+docker container rm dab586882318
+docker container run -it -p 5000:5000 -e FLASK_APP=app.py web2
+docker container run -it --rm --name web2 -p 5000:5000 -e FLASK_APP=app.py web2
+docker container run -it --rm --name web2 -p 5000:5000 -e FLASK_APP=app.py -d web2
+
+docker container run -it --rm --name web2_2 -p 5000 -e FLASK_APP=app.py -d web2
+docker container run -it --name web2_3 -p 5000 -e FLASK_APP=app.py -d --restart on-failure web2
+
+docker container logs web2
+docker container logs -f
+
+docker container stats
+
+docker container stop web2
+sudo service docker restart
+
+docker container run --help
+
+docker container run -it -p 5000:5000 -e FLASK_APP=app.py --rm --name web2 -e FLASK_DEBUG=1 web2
+docker container run -it -p 5000:5000 -e FLASK_APP=app.py --rm --name web2 -e FLASK_DEBUG=1 -v $PWD:/app web2
+
+docker container exec -it web2 bash
+
+docker container exec -it web2 touch hi.txt (will create the file under root user - do ls -al)
+docker container exec -it --user "$(id -u):$(id -g)" web2 touch hi.txt (to create the file under current user - do ls -al)
+
+docker container run -it --rm --name testingpython python:2.7-alpine python (to get a docker container python cli)
+
+# Lesson [29]
+
+docker container run  --rm -itd -p 6579:6379 --name redis redis:3.2-alpine
+
+docker network ls
+docker network inspect bridge
+docker exec web2_3 ifconfig
+
+docker exec redis ifconfig
+docker exec web2_3 ping 172.17.0.3
+
+docker exec redis cat /etc/hosts (to know the network configuration)
+docker container ls
+
+docker network create --driver bridge firstnetwork
+docker network inspect firstnetwork
+docker container stop web2_3
+docker container stop redis
+docker container run  --rm -itd -p 6579:6379 --name redis --net firstnetwork redis:3.2-alpine
+docker container run --rm -itd -p 5000:5000 -e FLASK_APP=app.py -e FLASK_DEBUG=1 --name web2 -v $PWD:/app --net firstnetwork web2
+docker network inspect firstnetwork (will see the containers add to the DNS)
+docker exec web2 ping redis
+
+docker exec -it redis redis-cli
+  KEYS *
+  INCRBY web2_counter 1000000
+^D (to exit redis cli)
+
+# Lesson [30] - needs to be revisited !!!
+
+docker container stop redis
+docker container stop web2
+docker container run  --rm -itd -p 6579:6379 --name redis --net firstnetwork redis:3.2-alpine
+docker container run --rm -itd -p 5000:5000 -e FLASK_APP=app.py -e FLASK_DEBUG=1 --name web2 -v $PWD:/app --net firstnetwork web2
+** reload web page several times (localhost:5000 in the browser)
+docker container stop redis
+docker volume create web2_redis
+docker volume ls
+docker volume inspect web2_redis
+docker container run  --rm -itd -p 6579:6379 --name redis --net firstnetwork -v web2_redis:/data redis:3.2-alpine
+sudo ls -la /var/lib/docker/volumes/web2_redis/_data
+docker exec redis redis-cli SAVE
+sudo ls -la /var/lib/docker/volumes/web2_redis/_data
+docker container stop redis
+docker container run  --rm -itd -p 6579:6379 --name redis --net firstnetwork -v web2_redis:/date redis:3.2-alpine
+** reload web page several times (localhost:5000 in the browser) - you will see that the number persists!
+sudo ls -la /var/lib/docker/volumes/web2_redis/_data
+
+...
+docker container stop redis
+docker container stop web2
+
+# Lesson [31]
+
+docker container run --rm -itd -p 5000:5000 -e FLASK_APP=app.py -e FLASK_DEBUG=1 --name web2 -v $PWD:/app --net firstnetwork web2
+docker container run  --rm -itd -p 6579:6379 --name redis --net firstnetwork -v web2_redis:/data --volumes-from web2 redis:3.2-alpine
+docker container exec -it redis sh
+  ls -la (notice the css file)
+
+docker container stop web2
+docker container stop redis
+(Comment the Docker file in - # VOLUME ["/app/public"])
+docker image build -t web2  .
+
+...
+docker container stop web2
+docker container stop redis
+
+# Lesson [32]
+
+docker image build -t weboptimized .
+docker container ls
+
+# Lesson [33]
+
+docker container run --rm -itd -p 6579:6379 --name redis --net firstnetwork -v web2_redis:/data redis:3.2-alpine
+docker image build -t webentrypoint .
+** reload the page (localhost:5000)
+
+docker container run --rm -it -p 5000:5000 -e FLASK_APP=app.py -e FLASK_DEBUG=1 --name webentrypoint -v $PWD:/app --net firstnetwork webentrypoint
+^C
+...
+
+docker container run --rm -it -p 5000:5000 -e FLASK_APP=app.py -e FLASK_DEBUG=1 -e WEB2_COUNTER_MSG="Docker fans have visited this page" --net firstnetwork webentrypoint
+* reload the page (localhost:5000)
+
+# Lesson [34]
+
+docker container ls
+docker container ls -a # to see all stopped containers
+
+docker system df
+docker image ls
+docker system df -v
+docker system info
+docker system prune # deletes all stuff that is not necessary already e.g.: images
+  docker system prune -f # don't ask you to confirm
+  docker system prune -a # delete all images not used. USE IF CAUTION as if you stop your containers and runs this command the related imaes will be deleted!
+  - Could be automated as a cron job -> <03 * * * /usr/bin/docker system prune -f>
+
+docker container stop aaa bbb ccc # stop the container in the list
+
+docker container stop $(docker container ls -a -q) # stop all containers in the argument
+
+docker image rm $(docker image ls -a -q) # delete all images in the argument
+docker network prune $(docker network ls -a -q) # delete all networks in the argument
+  or a more complex one: docker network rm $(docker network ls | awk '{print $2}')
+docker volume prune -f $(docker volume ls -a -q) # delete all volumes in the argument
+
+# Lesson [37]
+
+docker-compose build
+docker image ls
+docker-compose pull # will pull redis
+docker image ls # you will see the redis image know
+docker-compose up # will bring up the redis and the flask app
+
+^C or docker-compose stop (if found an error and don't see the containers stopped)
+
+docker-compose up --build -d # ^^^ it will do the tree previous steps in only one shoot ^^^
+                             # the -d is to run in background
+docker-compose up redis
+docker-compose ps
+
+docker-compose logs -f # to see the background logs - remember the -d flag that runs all in the background
+
+docker-compose restart
+docker-compose restart redis # to restart a specific service
+
+docker-compose exec web ls -la
+docker-compose exec web sh
+
+docker-compose run redis redis-server --version
+
+docker-compose stop
+docker-compose rm -f
+
+>>> END
