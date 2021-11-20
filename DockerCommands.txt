@@ -1,6 +1,6 @@
 
 # Lesson [25]
- 
+
 docker image build -t web1 .
 docker image build -t web1:1.0 .
 
@@ -195,5 +195,3 @@ docker-compose run redis redis-server --version
 
 docker-compose stop
 docker-compose rm -f
-
-# Lesson [40]
